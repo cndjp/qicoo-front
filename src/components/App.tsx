@@ -2,12 +2,12 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as React from 'react';
 
-import './App.css';
-import HeaderNav from './components/HeaderNav';
-import QuestionForm from './components/QuestionForm';
-import QuestionsList from './components/QuestionsList';
+import HeaderNav from './HeaderNav';
+import QuestionForm from './QuestionForm';
+import QuestionsList from './QuestionsList';
 
-class App extends React.Component {
+export default class App extends React.Component {
+  public ADD_QUESTION = 'ADD_QUESTION';
 
   public render() {
     return (
@@ -19,5 +19,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;

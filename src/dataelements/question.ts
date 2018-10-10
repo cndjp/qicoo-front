@@ -1,11 +1,13 @@
+import {v4} from 'uuid';
+
 export class Question {
     constructor(
-        private _id: string,
-        private _username: string,
         private _comment: string,
-        private _createdAt: Date,
-        private _updatedAt: Date,
-        private _like: number
+        private _id: string = v4(),
+        private _username: string = '',
+        private _createdAt: Date = new Date(),
+        private _updatedAt: Date = new Date(),
+        private _like: number = 0
     ) {
     }
 
