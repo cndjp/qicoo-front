@@ -1,5 +1,9 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
   "defaultSeverity": "warning",
   "linterOptions": {
     "exclude": [
@@ -9,7 +13,10 @@
     ]
   },
   "rules": {
-    "interface-name": [true, "never-prefix"],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
     "ordered-imports": false
   }
 }

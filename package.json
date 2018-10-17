@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.2",
@@ -16,6 +17,7 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
+    "format": "prettier --single-quote --trailing-comma es5 --write",
     "precommit": "lint-staged",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
@@ -23,6 +25,8 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
+    "prettier": "^1.14.2",
     "@types/bootstrap": "^4.1.2",
     "@types/jest": "^23.3.2",
     "@types/node": "^10.9.4",
@@ -34,8 +38,8 @@
     "typescript": "^3.0.3"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --write",
+    "src/**/*.{js,jsx,ts,tsx,json,css}": [
+      "npm run format",
       "git add"
     ]
   }
