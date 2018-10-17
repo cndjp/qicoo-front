@@ -23,13 +23,6 @@ type Actions = (
     | ReturnType<typeof addLike>
 )
 
-// const defaultQuestions : Question[] = [
-//     new Question("質問1です", "3bf18dad-c1a4-4f4a-bfb0-227594de89d6", "user1", new Date(), new Date(), 1),
-//     new Question("質問2です", "80f842ef-b532-4171-95f4-414a4d438fe6", "user2", new Date(), new Date(), 20),
-//     new Question("質問3です", "bf0298be-707a-4deb-88d0-0d35479fb30e", "user3", new Date(), new Date(), 300),
-// ];
-
-
 const questions:Reducer = (state: QuestionList, action: Actions) => {
 
     switch (action.type) {
