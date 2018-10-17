@@ -3,6 +3,7 @@ import { Question } from '../dataelements/question';
 import { QuestionList } from '../dataelements/questionList';
 
 const ADD_QUESTION = 'qicoo/question/ADD_QUESTION';
+const LOAD_QUESTION = 'qicoo/question/LOAD_QUESTION';
 const ADD_LIKE = 'qicoo/question/ADD_LIKE';
 
 export const addQuestion = (q: Question) => ({
@@ -11,6 +12,12 @@ export const addQuestion = (q: Question) => ({
   },
   type: ADD_QUESTION as typeof ADD_QUESTION,
 });
+export const loadQuestions = (qList: Question[]) => ({
+  payload: {
+    loadedQuestions: qList,
+  },
+  type: LOAD_QUESTION as typeof LOAD_QUESTION,
+});
 export const addLike = (q: Question) => ({
   payload: {
     favorite: q,
@@ -18,12 +25,17 @@ export const addLike = (q: Question) => ({
   type: ADD_LIKE as typeof ADD_LIKE,
 });
 
-type Actions = ReturnType<typeof addQuestion> | ReturnType<typeof addLike>;
+type Actions =
+  | ReturnType<typeof addQuestion>
+  | ReturnType<typeof loadQuestions>
+  | ReturnType<typeof addLike>;
 
 const questions: Reducer = (state: QuestionList, action: Actions) => {
   switch (action.type) {
     case ADD_QUESTION:
       return new QuestionList([action.payload.newQuestion, ...state.questions]);
+    case LOAD_QUESTION:
+      return new QuestionList(action.payload.loadedQuestions);
     case ADD_LIKE:
       const plusone = new QuestionList(
         state.questions.map(q => {

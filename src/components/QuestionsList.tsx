@@ -4,6 +4,8 @@ import { QuestionList } from '../dataelements/questionList';
 import QuestionElement from './QuestionElement';
 import EmptyQuestion from './EmptyQuestion';
 import { connect } from 'react-redux';
+import { getQuestionList } from 'src/actions/questions';
+import { Dispatch } from 'redux';
 
 export class QuestionsList extends React.Component<Props> {
   public render() {
@@ -20,6 +22,10 @@ export class QuestionsList extends React.Component<Props> {
       </main>
     );
   }
+
+  public componentDidMount = () => {
+    this.props.loadQuestion();
+  };
 }
 
 interface StateToProps {
@@ -30,8 +36,19 @@ const mapStateToProps = (state: any) => ({
   questionList: state.questions,
 });
 
-type Props = StateToProps;
+interface DispatchToProps {
+  loadQuestion: () => void;
+}
 
-export default connect<StateToProps, void, void>(mapStateToProps)(
-  QuestionsList
-);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  loadQuestion: (): void => {
+    getQuestionList(dispatch);
+  },
+});
+
+type Props = StateToProps & DispatchToProps;
+
+export default connect<StateToProps, DispatchToProps, void>(
+  mapStateToProps,
+  mapDispatchToProps
+)(QuestionsList);
