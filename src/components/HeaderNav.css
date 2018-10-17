@@ -1,26 +1,26 @@
 nav {
-    color: #fff;
-    background: #007395;
+  color: #fff;
+  background: #007395;
 }
 
 .base-color {
-    color: #fff;
-    background: #007395;
+  color: #fff;
+  background: #007395;
 }
 
 button:hover.base-color {
-    background: #00AEE1;    
+  background: #00aee1;
 }
 
 .accent1-color {
-    background: #00AEE1;
+  background: #00aee1;
 }
 .accent2-color {
-    background: #328CA7;
+  background: #328ca7;
 }
 .accent3-color {
-    background: #50E187;
+  background: #50e187;
 }
 .accent4-color {
-    background: #004C62;
+  background: #004c62;
 }

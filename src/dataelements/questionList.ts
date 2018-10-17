@@ -1,12 +1,9 @@
-import {Question} from './question';
+import { Question } from './question';
 
 export class QuestionList {
-    constructor(
-        readonly questions: Question[]
-    ) {
-    }
+  constructor(readonly questions: Question[]) {}
 
-    public isEmpty(): boolean {
-        return this.questions.length === 0;
-    }
+  public isEmpty(): boolean {
+    return this.questions.length === 0;
+  }
 }
