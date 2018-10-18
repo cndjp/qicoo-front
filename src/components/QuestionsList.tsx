@@ -1,37 +1,37 @@
 import * as React from 'react';
-import {Question} from '../dataelements/question'
-import {QuestionList} from '../dataelements/questionList'
-import QuestionElement from './QuestionElement'
-import EmptyQuestion from './EmptyQuestion'
+import { Question } from '../dataelements/question';
+import { QuestionList } from '../dataelements/questionList';
+import QuestionElement from './QuestionElement';
+import EmptyQuestion from './EmptyQuestion';
 import { connect } from 'react-redux';
 
 export class QuestionsList extends React.Component<Props> {
-
-    public render (){
-        const {questionList} = this.props;
-        return (
-            <main className="container-fluid">
-            {questionList.isEmpty() ?
-             <EmptyQuestion /> : 
-             questionList.questions.map((q:Question) => 
-            <QuestionElement
-                key={q.id}
-                q={q}
-             />
-            )}
-            </main>
-        );
-    }
+  public render() {
+    const { questionList } = this.props;
+    return (
+      <main className="container-fluid">
+        {questionList.isEmpty() ? (
+          <EmptyQuestion />
+        ) : (
+          questionList.questions.map((q: Question) => (
+            <QuestionElement key={q.id} q={q} />
+          ))
+        )}
+      </main>
+    );
+  }
 }
 
 interface StateToProps {
-    questionList: QuestionList
+  questionList: QuestionList;
 }
 
 const mapStateToProps = (state: any) => ({
-    questionList: state.questions
+  questionList: state.questions,
 });
 
-type Props = StateToProps
+type Props = StateToProps;
 
-export default connect<StateToProps,void, void>(mapStateToProps)(QuestionsList);
+export default connect<StateToProps, void, void>(mapStateToProps)(
+  QuestionsList
+);
