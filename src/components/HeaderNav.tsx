@@ -3,8 +3,6 @@ import * as React from 'react';
 
 import './HeaderNav.css';
 
-import logo from '../logo.png';
-
 interface State {
   menuExpanded: boolean;
 }
@@ -23,7 +21,6 @@ export default class HeaderNav extends React.Component<any, State> {
     return (
       <nav className="navbar navbar-expand-md navbar-dark fixed-top">
         <a className="navbar-brand" href="#">
-          <img src={logo} width="32px" height="32px" />
           Qicoo
         </a>
         <button
