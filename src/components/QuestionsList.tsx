@@ -7,7 +7,17 @@ import { connect } from 'react-redux';
 import { getQuestionList } from 'src/actions/questions';
 import { Dispatch } from 'redux';
 
-export class QuestionsList extends React.Component<Props> {
+const RELOAD_INTERVAL = 30;
+
+export class QuestionsList extends React.Component<Props, State> {
+
+  constructor(props: Props){
+    super(props);
+    this.state = {
+      interval: setInterval(() => this.props.loadQuestion(0), RELOAD_INTERVAL * 1000)
+    }
+  }
+
   public render() {
     const { questionList } = this.props;
     return (
@@ -24,8 +34,12 @@ export class QuestionsList extends React.Component<Props> {
   }
 
   public componentDidMount = () => {
-    this.props.loadQuestion();
+    this.props.loadQuestion(0);
   };
+
+  public componentWillUnmount = () => {
+    clearInterval(this.state.interval);
+  }
 }
 
 interface StateToProps {
@@ -37,16 +51,20 @@ const mapStateToProps = (state: any) => ({
 });
 
 interface DispatchToProps {
-  loadQuestion: () => void;
+  loadQuestion: (loadedCount: number) => void;
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  loadQuestion: (): void => {
-    getQuestionList(dispatch);
+  loadQuestion: (loadedCount: number): void => {
+    getQuestionList(loadedCount, dispatch);
   },
 });
 
 type Props = StateToProps & DispatchToProps;
+interface State {
+  interval: NodeJS.Timer
+};
+
 
 export default connect<StateToProps, DispatchToProps, void>(
   mapStateToProps,

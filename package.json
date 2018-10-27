@@ -33,7 +33,9 @@
     "@types/react-redux": "^6.0.9",
     "@types/uuid": "^3.4.4",
     "jquery": "^3.3.1",
-    "typescript": "^3.0.3"
+    "typescript": "^3.0.3",
+    "tslint-react": "^3.6.0",
+    "tslint-config-prettier": "^1.17.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css}": [

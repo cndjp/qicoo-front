@@ -57,7 +57,7 @@ const addLikeOne = (q: Question): Question => {
     q.comment,
     q.id,
     q.username,
-    q.createdAt,
+    q.created_at,
     new Date(),
     q.like + 1
   );
