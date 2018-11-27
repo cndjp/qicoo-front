@@ -1,0 +1,16 @@
+.sending {
+    animation-duration: 0.5s;
+    animation-name: fade;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+}
+
+@keyframes fade {
+    from {
+        opacity: 1.0;
+    }
+  
+    to {
+        opacity: 0.45;
+    }
+  }
