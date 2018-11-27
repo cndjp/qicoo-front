@@ -4,7 +4,17 @@ import { Dispatch } from 'redux';
 import { Question } from '../dataelements/question';
 import { putLike } from 'src/actions/questions';
 
-export class QuestionElement extends React.Component<Props> {
+import './QuestionElement.css';
+
+const INTERVAL = 1*1000;
+
+export class QuestionElement extends React.Component<Props, State> {
+
+  constructor(prop: Props, state: State){
+    super(prop, state);
+    this.state = {sending: false};
+  }
+
   public render() {
     const { q } = this.props;
 
@@ -15,8 +25,9 @@ export class QuestionElement extends React.Component<Props> {
 
           <button
             type="button"
-            className="btn base-color"
             onClick={this.addLike}
+            disabled={this.state.sending}
+            className={`btn base-color add-star-button ${this.state.sending && "sending"}`}
           >
             ★ {q.like}
           </button>
@@ -33,6 +44,10 @@ export class QuestionElement extends React.Component<Props> {
 
   private addLike = () => {
     this.props.addLike(this.props.q);
+    this.setState({sending: true});
+    setTimeout(() => {
+      this.setState({sending: false})
+    }, INTERVAL);
   };
 }
 
@@ -56,6 +71,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 type Props = StateToProps & DispatchToProps;
+
+interface State {
+  sending: boolean
+}
 
 export default connect<StateToProps, DispatchToProps, MyProps>(
   mapStateToProps,
