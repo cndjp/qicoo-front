@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Question } from '../dataelements/question';
-import { addLike } from '../reducers/questions';
+import { putLike } from 'src/actions/questions';
 
 export class QuestionElement extends React.Component<Props> {
   public render() {
@@ -22,7 +22,10 @@ export class QuestionElement extends React.Component<Props> {
           </button>
         </div>
         <footer className="blockquote-footer">
-          {q.username} at {q.createdAt.toISOString()}
+          {q.username} @ {q.created_at.toLocaleString('gregory', {
+            timeZone: 'Asia/Tokyo',
+            hour12: false
+          })}
         </footer>
       </div>
     );
@@ -47,7 +50,9 @@ interface DispatchToProps {
   addLike: (q: Question) => void;
 }
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addLike: (q: Question) => dispatch(addLike(q)),
+  addLike: (q: Question) => {
+    putLike(dispatch, q);
+  },
 });
 
 type Props = StateToProps & DispatchToProps;

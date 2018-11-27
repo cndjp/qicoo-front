@@ -9,6 +9,10 @@ import QuestionsList from './QuestionsList';
 export default class App extends React.Component {
   public ADD_QUESTION = 'ADD_QUESTION';
 
+  constructor(props: any){
+    super(props);
+  }
+
   public render() {
     return (
       <div>
