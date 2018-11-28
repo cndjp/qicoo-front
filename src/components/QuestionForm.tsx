@@ -34,7 +34,7 @@ class QuestionForm extends React.Component<Prop, State> {
             />
           </div>
           <div className="mb-2 col-md-auto">
-            <button className="btn btn-outline-light w-100" type="submit">
+            <button className="btn btn-outline-light w-100" type="submit" disabled={!this.validInput()}>
               聞いてみる
             </button>
           </div>
@@ -58,6 +58,10 @@ class QuestionForm extends React.Component<Prop, State> {
 
   private clearForm = () => {
     this.setState({ input: '' });
+  };
+
+  private validInput = () : boolean => {
+    return this.state.input !== null && this.state.input.length > 0
   };
 }
 
