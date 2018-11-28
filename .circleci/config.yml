@@ -21,6 +21,10 @@ jobs:
       # run tests!
       # - run: yarn test
       - run:
+          name: substitute API base URL
+          working_directory: ~/repo/src/actions
+          command: 'sed -i -e "s/BASE_URL_TO_BE_REPLACED/${API_BASE_URL}/g" questions.ts'
+      - run:
           name: build
           command: 'yarn run build'
   deploy:
