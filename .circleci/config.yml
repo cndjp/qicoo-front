@@ -20,4 +20,31 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       # run tests!
       # - run: yarn test
+      - run:
+          name: build
+          command: 'yarn run build'
+  deploy:
+    docker:
+      - image: circleci/python:3.6
+      - run :
+          name: install aws-cli
+          working_directory: /
+          command: |
+            pip install awscli --user
+      - run:
+          name: deploy
+          command: aws s3 sync ~/repo/build s3://${CIRCLE_BRANCH}.${S3_BUCKET_NAME_SUFFIX} --delete
 
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: 
+                - master
+                - preview
