@@ -30,14 +30,15 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
+            - build
             - build/*
   deploy:
+    working_directory: /
     docker:
       - image: circleci/python:3.6
     steps:
       - run :
           name: install aws-cli
-          working_directory: /
           command: |
             pip install awscli --user
       - run:
