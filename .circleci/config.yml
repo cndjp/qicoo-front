@@ -28,12 +28,12 @@ jobs:
           name: build
           command: 'yarn run build'
       - persist_to_workspace:
-          root: ~/repo
+          root: .
           paths:
             - build
             - build/*
   deploy:
-    working_directory: ~/
+    working_directory: ~/workspace
     docker:
       - image: circleci/python:3.6
     steps:
@@ -41,11 +41,13 @@ jobs:
           name: install aws-cli
           command: |
             pip install awscli --user
+      - attach_workspace:
+          at: .
       - run:
-          command: ls -la ~/
+          command: ls -la ~/workspace
       - run:
           name: deploy
-          command: ~/.local/bin/aws s3 sync ~/build s3://${CIRCLE_BRANCH}.${S3_BUCKET_NAME_SUFFIX} --delete
+          command: ~/.local/bin/aws s3 sync ./build s3://${CIRCLE_BRANCH}.${S3_BUCKET_NAME_SUFFIX} --delete
 
 workflows:
   version: 2
