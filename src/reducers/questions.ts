@@ -37,7 +37,7 @@ const questions: Reducer = (state: QuestionList, action: Actions) => {
     case LOAD_QUESTION:
       return new QuestionList(action.payload.loadedQuestions);
     case ADD_LIKE:
-      const plusone = new QuestionList(
+      return new QuestionList(
         state.questions.map(q => {
           if (q.id === action.payload.favorite.id) {
             return addLikeOne(q);
@@ -45,7 +45,6 @@ const questions: Reducer = (state: QuestionList, action: Actions) => {
           return q;
         })
       );
-      return plusone;
     default:
       // return defaultQuestions;
       return new QuestionList([]);

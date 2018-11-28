@@ -1,0 +1,64 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.13
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      # run tests!
+      # - run: yarn test
+      - run:
+          name: substitute API base URL
+          working_directory: ~/repo/src/actions
+          command: 'sed -i -e "s|BASE_URL_TO_BE_REPLACED|${API_BASE_URL}|g" questions.ts'
+      - run:
+          name: build
+          command: 'yarn run build'
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+            - build/*
+  deploy:
+    working_directory: ~/workspace
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - run :
+          name: install aws-cli
+          command: |
+            pip install awscli --user
+      - attach_workspace:
+          at: .
+      - run:
+          command: ls -la ~/workspace/build
+      - run:
+          name: deploy
+          command: ~/.local/bin/aws s3 sync ./build s3://${CIRCLE_BRANCH}.${S3_BUCKET_NAME_SUFFIX} --delete
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: 
+                - master
+                - preview
