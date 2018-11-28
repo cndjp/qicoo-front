@@ -42,6 +42,8 @@ jobs:
           command: |
             pip install awscli --user
       - run:
+          command: ls -la /
+      - run:
           name: deploy
           command: ~/.local/bin/aws s3 sync /build s3://${CIRCLE_BRANCH}.${S3_BUCKET_NAME_SUFFIX} --delete
 
