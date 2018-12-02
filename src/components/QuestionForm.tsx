@@ -30,7 +30,7 @@ class QuestionForm extends React.Component<Prop, State> {
               onChange={this.handleQuestionInput}
               className="form-control w-100"
               rows={2}
-              placeholder="聞いてみよう：このアプリは1Podでどのくらいの人数に対応できるの？"
+              placeholder="聞いてみよう：リモートでのコミュニケーションはどうやったのですか"
             />
           </div>
           <div className="mb-2 col-md-auto">

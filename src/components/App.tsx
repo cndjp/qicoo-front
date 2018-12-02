@@ -1,5 +1,4 @@
 import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import * as React from 'react';
 
 import HeaderNav from './HeaderNav';
