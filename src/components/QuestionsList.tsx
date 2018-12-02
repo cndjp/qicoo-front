@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Question } from '../dataelements/question';
 import { QuestionList } from '../dataelements/questionList';
+import PageNav from './PageNav';
 import QuestionElement from './QuestionElement';
 import EmptyQuestion from './EmptyQuestion';
 import { connect } from 'react-redux';
@@ -8,37 +9,47 @@ import { getQuestionList } from 'src/actions/questions';
 import { Dispatch } from 'redux';
 
 const RELOAD_INTERVAL = 30;
+const QUESTIONS_PER_PAGE = 20;
 
 export class QuestionsList extends React.Component<Props, State> {
 
   constructor(props: Props){
     super(props);
     this.state = {
-      interval: setInterval(() => this.props.loadQuestion(0), RELOAD_INTERVAL * 1000)
+      interval: setInterval(() => this.props.loadQuestion(props.page, props.sort), RELOAD_INTERVAL * 1000)
     }
   }
 
   public render() {
-    const { questionList } = this.props;
+    const { questionList, page, sort } = this.props;
     return (
       <main className="container-fluid">
-        {questionList.isEmpty() ? (
-          <EmptyQuestion />
-        ) : (
-          questionList.questions.map((q: Question) => (
-            <QuestionElement key={q.id} q={q} />
-          ))
-        )}
+        {
+          questionList.isEmpty() ?
+          <EmptyQuestion /> :
+          this.renderLists(questionList, page, sort)
+        }
       </main>
     );
   }
 
   public componentDidMount = () => {
-    this.props.loadQuestion(0);
+    const { page, sort } = this.props;
+    this.props.loadQuestion(page, sort);
   };
 
   public componentWillUnmount = () => {
     clearInterval(this.state.interval);
+  }
+
+  private renderLists = (ql: QuestionList, page: number, sort: string): JSX.Element[] => {
+    const items = ql.questions.map((q: Question) => (
+      <QuestionElement key={q.id} q={q} />
+    ));
+    
+    items.push(<PageNav activePage={page} questionsPerPage={QUESTIONS_PER_PAGE} total={ql.total} sort={sort} key="pagenav" />);
+
+    return items;
   }
 }
 
@@ -51,20 +62,24 @@ const mapStateToProps = (state: any) => ({
 });
 
 interface DispatchToProps {
-  loadQuestion: (loadedCount: number) => void;
+  loadQuestion: (page:number, sort:string) => void;
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  loadQuestion: (loadedCount: number): void => {
-    getQuestionList(loadedCount, dispatch);
+  loadQuestion: (page:number, sort:string): void => {
+    getQuestionList((page-1)*QUESTIONS_PER_PAGE +1, page*QUESTIONS_PER_PAGE, sort, dispatch);
   },
 });
 
-type Props = StateToProps & DispatchToProps;
+interface ReactProps {
+  page: number;
+  sort: string;
+};
+type Props = StateToProps & DispatchToProps & ReactProps;
+
 interface State {
   interval: NodeJS.Timer
 };
-
 
 export default connect<StateToProps, DispatchToProps, void>(
   mapStateToProps,

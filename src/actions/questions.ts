@@ -6,7 +6,6 @@ import QuestionListInJson from '../dataelements/questionListInJson';
 import { addQuestion, addLike, loadQuestions } from '../reducers/questions';
 
 const BASE_URL = 'BASE_URL_TO_BE_REPLACED';
-const QUESITONS_PER_REQUEST = 10;
 const TIMEOUT = 30 * 1000;
 
 export async function postQuestion(dispatch: Dispatch, q: Question) {
@@ -38,13 +37,13 @@ export async function putLike(dispatch: Dispatch, q: Question) {
   });
 }
 
-export async function getQuestionList(loadedCount: number, dispatch: Dispatch) {
+export async function getQuestionList(begin: number, end: number, sort: string, dispatch: Dispatch) {
   axios
     .get(BASE_URL + "/questions", {
       params: {
-        start: loadedCount + 1,
-        end: loadedCount + QUESITONS_PER_REQUEST,
-        sort: "created_at",
+        start: begin,
+        end,
+        sort,
         order: "desc"
       },
       transformResponse: (res) => {
@@ -58,7 +57,7 @@ export async function getQuestionList(loadedCount: number, dispatch: Dispatch) {
     })
     .then((res: AxiosResponse<QuestionListInJson>) => {
       if (res.status === 200 && res.data.data !== null) {
-        dispatch(loadQuestions(res.data.data));
+        dispatch(loadQuestions(res.data.data, res.data.total));
       } else {
         console.warn('http status code in POST response: ' + res.status);
       }
