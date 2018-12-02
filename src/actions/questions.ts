@@ -14,7 +14,7 @@ export async function postQuestion(dispatch: Dispatch, q: Question) {
     .then((res: AxiosResponse) => {
       const httpStatus = res.status;
       if (200 <= httpStatus && httpStatus <= 299) {
-        dispatch(addQuestion(q));
+        dispatch(addQuestion(res.data));
       } else {
         console.warn('http status code in POST response: ' + httpStatus);
       }
