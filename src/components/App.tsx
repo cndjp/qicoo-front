@@ -14,10 +14,15 @@ export default class App extends React.Component {
   }
 
   public render() {
+
+    const parsedUrl = new URL(window.location.href);
+    const page = parseInt(parsedUrl.searchParams.get("p") || "1", 10);
+    const sort = parsedUrl.searchParams.get("sort") || "created_at";
+
     return (
       <div>
-        <HeaderNav />
-        <QuestionsList />
+        <HeaderNav page={page} sort={sort} />
+        <QuestionsList page={page} sort={sort} />
         <QuestionForm />
       </div>
     );

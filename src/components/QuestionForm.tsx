@@ -22,7 +22,7 @@ class QuestionForm extends React.Component<Prop, State> {
 
   public render() {
     return (
-      <nav className="navbar navbar-dark fixed-bottom pt-2 px-2 pb-0">
+      <nav className="navbar navbar-dark fixed-bottom pt-2 px-2 pb-0 fixed-position">
         <form onSubmit={this.postNewQuestion} className="form-inline w-100">
           <div className="mb-2 pr-md-0 col-md">
             <textarea
@@ -30,7 +30,7 @@ class QuestionForm extends React.Component<Prop, State> {
               onChange={this.handleQuestionInput}
               className="form-control w-100"
               rows={2}
-              placeholder="聞いてみよう：生命、宇宙、そして万物についての究極の疑問の答えは何？"
+              placeholder="聞いてみよう：このアプリは1Podでどのくらいの人数に対応できるの？"
             />
           </div>
           <div className="mb-2 col-md-auto">

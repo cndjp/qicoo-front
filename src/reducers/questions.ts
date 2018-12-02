@@ -12,9 +12,10 @@ export const addQuestion = (q: Question) => ({
   },
   type: ADD_QUESTION as typeof ADD_QUESTION,
 });
-export const loadQuestions = (qList: Question[]) => ({
+export const loadQuestions = (qList: Question[], total: number) => ({
   payload: {
     loadedQuestions: qList,
+    totalCount: total,
   },
   type: LOAD_QUESTION as typeof LOAD_QUESTION,
 });
@@ -33,9 +34,10 @@ type Actions =
 const questions: Reducer = (state: QuestionList, action: Actions) => {
   switch (action.type) {
     case ADD_QUESTION:
-      return new QuestionList([action.payload.newQuestion, ...state.questions]);
+      return new QuestionList([action.payload.newQuestion, ...state.questions], 
+        state.questions.length + 1);
     case LOAD_QUESTION:
-      return new QuestionList(action.payload.loadedQuestions);
+      return new QuestionList(action.payload.loadedQuestions, action.payload.totalCount);
     case ADD_LIKE:
       return new QuestionList(
         state.questions.map(q => {
@@ -43,11 +45,12 @@ const questions: Reducer = (state: QuestionList, action: Actions) => {
             return addLikeOne(q);
           }
           return q;
-        })
+        }),
+        state.total
       );
     default:
       // return defaultQuestions;
-      return new QuestionList([]);
+      return new QuestionList([], 0);
   }
 };
 

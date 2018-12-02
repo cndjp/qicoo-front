@@ -1,14 +1,20 @@
 import 'bootstrap';
 import * as React from 'react';
+import SortButtons from './SortButtons';
 
 import './HeaderNav.css';
+
+interface Props {
+  page: number;
+  sort: string
+}
 
 interface State {
   menuExpanded: boolean;
 }
 
-export default class HeaderNav extends React.Component<any, State> {
-  constructor(props: any) {
+export default class HeaderNav extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { menuExpanded: false };
   }
@@ -19,7 +25,7 @@ export default class HeaderNav extends React.Component<any, State> {
       'collapse navbar-collapse' + (menuExpanded ? ' show' : '');
 
     return (
-      <nav className="navbar navbar-expand-md navbar-dark fixed-top">
+      <nav className="navbar navbar-expand-md navbar-dark fixed-top fixed-position">
         <a className="navbar-brand" href="#">
           Qicoo
         </a>
@@ -37,30 +43,18 @@ export default class HeaderNav extends React.Component<any, State> {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="#">
-                最新の質問
+                Japan Container Days v2018.12
                 <span className="sr-only">(現在のページ)</span>
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                過去の質問
-              </a>
-            </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a className="nav-link" href="#">
                 使い方
               </a>
-            </li>
+            </li> */}
           </ul>
 
-          <form className="form-inline mt-2 mt-md-0">
-            <button
-              className="btn btn-outline-light my-2 my-sm-0"
-              type="submit"
-            >
-              Twitter でログイン
-            </button>
-          </form>
+          <SortButtons page={this.props.page} sort={this.props.sort} />
         </div>
       </nav>
     );
