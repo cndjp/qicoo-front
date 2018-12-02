@@ -43,7 +43,7 @@ export default class HeaderNav extends React.Component<Props, State> {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="#">
-                Japan Container Days v2018.12
+                JapanContainerDays v18.12
                 <span className="sr-only">(現在のページ)</span>
               </a>
             </li>
