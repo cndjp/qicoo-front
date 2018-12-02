@@ -8,6 +8,10 @@ nav.fixed-position {
   background: #007395;
 }
 
+.base-color-text {
+  color: #007395;
+}
+
 button:hover.base-color {
   background: #00aee1;
 }

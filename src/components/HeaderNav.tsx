@@ -2,7 +2,7 @@ import 'bootstrap';
 import * as React from 'react';
 import SortButtons from './SortButtons';
 
-import './HeaderNav.css';
+import './BaseColors.css';
 
 interface Props {
   page: number;
@@ -43,6 +43,7 @@ export default class HeaderNav extends React.Component<Props, State> {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="#">
+                <i className="fas fa-chalkboard-teacher" />&nbsp;
                 JapanContainerDays v18.12
                 <span className="sr-only">(現在のページ)</span>
               </a>

@@ -19,8 +19,8 @@ export default class SortButtons extends React.Component<Props> {
 
   private sortButtons = (p: Props): JSX.Element[] => {
     const sortKeys: Array<{key: string, displayname: string}> 
-      = [ {key: "created_at", displayname: "新着"}, 
-          {key: "like", displayname: "★の多い順"}];
+      = [ {key: "created_at", displayname: "<i class='fas fa-clock'></i> 新着"}, 
+          {key: "like", displayname: "<i class='fas fa-star'></i> の多い順"}];
     const items: JSX.Element[] = [];
 
     sortKeys.forEach((pair)=>{
@@ -28,7 +28,8 @@ export default class SortButtons extends React.Component<Props> {
         <button type="button"
           onClick={this.clickHandler(p.page, pair.key)}
           className={"btn " + ((pair.key === p.sort) ? "btn-light" : "btn-outline-light")}
-          key={pair.key}>{pair.displayname}</button>
+          key={pair.key}
+          dangerouslySetInnerHTML={{__html: pair.displayname}} />
         )
       }
     )

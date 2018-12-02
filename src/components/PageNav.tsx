@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import './BaseColors.css';
+
 interface Props {
   activePage: number;
   questionsPerPage: number;
@@ -17,7 +19,7 @@ export default class PageNav extends React.Component<Props> {
         <ul className="pagination justify-content-center">
           {this.pageLinks(p)}
           <li className="page-item disabled" key="total">
-            <span className="page-link">{this.props.total} questions</span>
+            <span className="page-link"><i className="fas fa-comment-alt fa-flip-horizontal" /> {this.props.total} questions</span>
           </li>
         </ul>
       </nav>
@@ -30,8 +32,8 @@ export default class PageNav extends React.Component<Props> {
 
     for (let i: number = 1; i <= pageCount; i++){
       items.push(
-        <li className={"page-item" + (i === p.activePage && " active")} key={i}>
-          <a className="page-link" href={`?p=${i}&sort=${p.sort}`}>
+        <li className="page-item" key={i}>
+          <a className={`page-link ${(i === p.activePage ? "base-color" : "base-color-text")}`} href={`?p=${i}&sort=${p.sort}`}>
             {i}
             {(i === p.activePage && <span className='sr-only'>（現在のページ）</span>)}
           </a>

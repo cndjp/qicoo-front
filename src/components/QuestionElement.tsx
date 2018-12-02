@@ -7,6 +7,7 @@ import { putLike } from 'src/actions/questions';
 import './QuestionElement.css';
 
 const INTERVAL = 1*1000;
+const ATTENTION_THRESHOLD = 100;
 
 export class QuestionElement extends React.Component<Props, State> {
 
@@ -29,7 +30,8 @@ export class QuestionElement extends React.Component<Props, State> {
             disabled={this.state.sending}
             className={`btn base-color add-star-button ${this.state.sending && "sending"}`}
           >
-            ★ {q.like}
+            <i className={`fas ${this.starIcon(q.like)}`} />
+            &nbsp;{q.like}
           </button>
         </div>
         <footer className="blockquote-footer">
@@ -49,6 +51,16 @@ export class QuestionElement extends React.Component<Props, State> {
       this.setState({sending: false})
     }, INTERVAL);
   };
+
+  private starIcon = (like: number): string => {
+
+    if (like === 0) {
+      return 'fa-star-half-alt'
+    } else if (like < ATTENTION_THRESHOLD) {
+      return 'fa-star'
+    }
+    return 'fa-sun'
+  }
 }
 
 interface StateToProps {
