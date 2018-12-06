@@ -8,19 +8,19 @@ import { connect } from 'react-redux';
 import { getQuestionList } from 'src/actions/questions';
 import { Dispatch } from 'redux';
 
-const RELOAD_INTERVAL = 25;
-const RELOAD_VARIANCE = 10;
+// const RELOAD_INTERVAL = 25;
+// const RELOAD_VARIANCE = 10;
 const QUESTIONS_PER_PAGE = 20;
 
 export class QuestionsList extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      interval: setInterval(
-        () => this.props.loadQuestion(props.page, props.sort),
-        (RELOAD_INTERVAL + Math.random() * RELOAD_VARIANCE) * 1000
-      ),
-    };
+    // this.state = {
+    //   interval: setInterval(
+    //     () => this.props.loadQuestion(props.page, props.sort),
+    //     (RELOAD_INTERVAL + Math.random() * RELOAD_VARIANCE) * 1000
+    //   ),
+    // };
   }
 
   public render() {
@@ -36,14 +36,14 @@ export class QuestionsList extends React.Component<Props, State> {
     );
   }
 
-  public componentDidMount = () => {
-    const { page, sort } = this.props;
-    this.props.loadQuestion(page, sort);
-  };
+  // public componentDidMount = () => {
+  //   const { page, sort } = this.props;
+  //   this.props.loadQuestion(page, sort);
+  // };
 
-  public componentWillUnmount = () => {
-    clearInterval(this.state.interval);
-  };
+  // public componentWillUnmount = () => {
+  //   clearInterval(this.state.interval);
+  // };
 
   private renderLists = (
     ql: QuestionList,

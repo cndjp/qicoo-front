@@ -1,6 +1,6 @@
 import 'bootstrap';
 import * as React from 'react';
-import SortButtons from './SortButtons';
+//import SortButtons from './SortButtons';
 
 import './BaseColors.css';
 
@@ -55,7 +55,7 @@ export default class HeaderNav extends React.Component<Props, State> {
             </li> */}
           </ul>
 
-          <SortButtons page={this.props.page} sort={this.props.sort} />
+          {/* <SortButtons page={this.props.page} sort={this.props.sort} /> */}
         </div>
       </nav>
     );
