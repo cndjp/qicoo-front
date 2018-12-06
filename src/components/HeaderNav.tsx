@@ -1,6 +1,6 @@
 import 'bootstrap';
 import * as React from 'react';
-//import SortButtons from './SortButtons';
+// import SortButtons from './SortButtons';
 
 import './BaseColors.css';
 
