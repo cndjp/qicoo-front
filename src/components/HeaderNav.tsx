@@ -1,6 +1,6 @@
 import 'bootstrap';
 import * as React from 'react';
-// import SortButtons from './SortButtons';
+import SortButtons from './SortButtons';
 
 import './BaseColors.css';
 
@@ -44,7 +44,7 @@ export default class HeaderNav extends React.Component<Props, State> {
             <li className="nav-item active">
               <a className="nav-link" href="#">
                 <i className="fas fa-chalkboard-teacher" />&nbsp;
-                JapanContainerDays v18.12
+                Cloud Native Depelopers JP 9th
                 <span className="sr-only">(現在のページ)</span>
               </a>
             </li>
@@ -55,7 +55,7 @@ export default class HeaderNav extends React.Component<Props, State> {
             </li> */}
           </ul>
 
-          {/* <SortButtons page={this.props.page} sort={this.props.sort} /> */}
+          <SortButtons page={this.props.page} sort={this.props.sort} />
         </div>
       </nav>
     );

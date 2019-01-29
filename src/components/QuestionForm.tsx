@@ -30,15 +30,14 @@ class QuestionForm extends React.Component<Prop, State> {
               onChange={this.handleQuestionInput}
               className="form-control w-100"
               rows={2}
-              placeholder="今回の質問の受付は締め切りました"
-              disabled={true}
+              placeholder="聞いてみよう：リモートでのコミュニケーションはどうやったのですか"
             />
           </div>
-          {/* <div className="mb-2 col-md-auto">
+          <div className="mb-2 col-md-auto">
             <button className="btn btn-light w-100" type="submit" disabled={!this.validInput()}>
               聞いてみる
             </button>
-          </div> */}
+          </div>
         </form>
       </nav>
     );
@@ -61,9 +60,9 @@ class QuestionForm extends React.Component<Prop, State> {
     this.setState({ input: '' });
   };
 
-  // private validInput = () : boolean => {
-  //   return this.state.input !== null && this.state.input.length > 0
-  // };
+  private validInput = () : boolean => {
+    return this.state.input !== null && this.state.input.length > 0
+  };
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
