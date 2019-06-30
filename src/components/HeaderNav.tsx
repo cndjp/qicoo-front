@@ -44,7 +44,7 @@ export default class HeaderNav extends React.Component<Props, State> {
             <li className="nav-item active">
               <a className="nav-link" href="#">
                 <i className="fas fa-chalkboard-teacher" />&nbsp;
-                Cloud Native Developers JP 11th
+                Cloud Native Developers JP 12th
                 <span className="sr-only">(現在のページ)</span>
               </a>
             </li>
