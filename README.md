@@ -1,4 +1,6 @@
 # Qicoo App front end
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcndjp%2Fqicoo-front.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcndjp%2Fqicoo-front?ref=badge_shield)
+
 
 This is the front end application of Qicoo app. All files are under development.
 
@@ -17,3 +19,6 @@ Run command below:
 ```sh
 docker run --rm -d -p 8080:80 cndjp/qicoo-front
 ```
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcndjp%2Fqicoo-front.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcndjp%2Fqicoo-front?ref=badge_large)
