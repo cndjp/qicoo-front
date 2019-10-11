@@ -6,7 +6,6 @@ import QuestionListInJson from '../dataelements/questionListInJson';
 import { addQuestion, addLike, loadQuestions } from '../reducers/questions';
 import { NewQuestion } from 'src/dataelements/newQuestion';
 import { IncrementLikeResponse } from 'src/dataelements/incrLikeResponse';
-//import { IncrementLike } from 'src/dataelements/incrLike';
 
 const BASE_URL = 'BASE_URL_TO_BE_REPLACED';
 const TIMEOUT = 30 * 1000;
