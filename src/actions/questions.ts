@@ -5,7 +5,6 @@ import { Question } from '../dataelements/question';
 import QuestionListInJson from '../dataelements/questionListInJson';
 import { addQuestion, addLike, loadQuestions } from '../reducers/questions';
 import { NewQuestion } from 'src/dataelements/newQuestion';
-import { IncrementLike } from 'src/dataelements/incrLike';
 import { IncrementLikeResponse } from 'src/dataelements/incrLikeResponse';
 
 const BASE_URL = 'BASE_URL_TO_BE_REPLACED';
