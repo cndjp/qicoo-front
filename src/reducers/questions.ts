@@ -1,8 +1,6 @@
 import { Reducer } from 'redux';
 import { Question } from '../dataelements/question';
-import { NewQuestion } from '../dataelements/newQuestion';
 import { QuestionList } from '../dataelements/questionList';
-import { IncrementLikeResponse } from 'src/dataelements/incrLikeResponse';
 
 const ADD_QUESTION = 'qicoo/question/ADD_QUESTION';
 const LOAD_QUESTION = 'qicoo/question/LOAD_QUESTION';
