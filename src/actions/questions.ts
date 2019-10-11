@@ -7,7 +7,7 @@ import { addQuestion, addLike, loadQuestions } from '../reducers/questions';
 import { NewQuestion } from 'src/dataelements/newQuestion';
 import { IncrementLikeResponse } from 'src/dataelements/incrLikeResponse';
 
-const BASE_URL = 'BASE_URL_TO_BE_REPLACED';
+const BASE_URL = 'http://localhost:8081';
 const TIMEOUT = 30 * 1000;
 
 export async function postQuestion(dispatch: Dispatch, q: NewQuestion) {
@@ -60,7 +60,7 @@ export async function getQuestionList(
   dispatch: Dispatch
 ) {
   axios
-    .get(BASE_URL + '/api/v1/questions', {
+    .get('http://localhost:8081' + '/api/v1/questions', {
       params: {
         per,
         page,
@@ -77,8 +77,8 @@ export async function getQuestionList(
       },
     })
     .then((res: AxiosResponse<QuestionListInJson>) => {
-      if (res.status === 200 && res.data.data !== null) {
-        dispatch(loadQuestions(res.data.data, res.data.total));
+      if (res.status === 200 && res.data.value !== null) {
+        dispatch(loadQuestions(res.data.value, res.data.total));
       } else {
         console.warn('http status code in POST response: ' + res.status);
       }
