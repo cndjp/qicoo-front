@@ -82,12 +82,7 @@ interface DispatchToProps {
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   loadQuestion: (page: number, sort: string): void => {
-    getQuestionList(
-      (page - 1) * QUESTIONS_PER_PAGE + 1,
-      page * QUESTIONS_PER_PAGE,
-      sort,
-      dispatch
-    );
+    getQuestionList(QUESTIONS_PER_PAGE, page, sort, dispatch);
   },
 });
 
