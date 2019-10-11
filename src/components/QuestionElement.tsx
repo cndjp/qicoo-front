@@ -5,15 +5,15 @@ import { Question } from '../dataelements/question';
 import { putLike } from 'src/actions/questions';
 
 import './QuestionElement.css';
+import { IncrementLike } from 'src/dataelements/incrLike';
 
-const INTERVAL = 1*1000;
+const INTERVAL = 1 * 1000;
 const ATTENTION_THRESHOLD = 100;
 
 export class QuestionElement extends React.Component<Props, State> {
-
-  constructor(prop: Props, state: State){
+  constructor(prop: Props, state: State) {
     super(prop, state);
-    this.state = {sending: false};
+    this.state = { sending: false };
   }
 
   public render() {
@@ -28,16 +28,18 @@ export class QuestionElement extends React.Component<Props, State> {
             type="button"
             onClick={this.addLike}
             disabled={this.state.sending}
-            className={`btn base-color add-star-button ${this.state.sending && "sending"}`}
+            className={`btn base-color add-star-button ${this.state.sending &&
+              'sending'}`}
           >
-            <i className={`fas ${this.starIcon(q.like)}`} />
-            &nbsp;{q.like}
+            <i className={`fas ${this.starIcon(q.like_count)}`} />
+            &nbsp;{q.like_count}
           </button>
         </div>
         <footer className="blockquote-footer">
-          {q.username} @ {q.created_at.toLocaleString('gregory', {
+          {q.display_name} @{' '}
+          {q.created.toLocaleString('gregory', {
             timeZone: 'Asia/Tokyo',
-            hour12: false
+            hour12: false,
           })}
         </footer>
       </div>
@@ -46,21 +48,20 @@ export class QuestionElement extends React.Component<Props, State> {
 
   private addLike = () => {
     this.props.addLike(this.props.q);
-    this.setState({sending: true});
+    this.setState({ sending: true });
     setTimeout(() => {
-      this.setState({sending: false})
+      this.setState({ sending: false });
     }, INTERVAL);
   };
 
   private starIcon = (like: number): string => {
-
     if (like === 0) {
-      return 'fa-star-half-alt'
+      return 'fa-star-half-alt';
     } else if (like < ATTENTION_THRESHOLD) {
-      return 'fa-star'
+      return 'fa-star';
     }
-    return 'fa-sun'
-  }
+    return 'fa-sun';
+  };
 }
 
 interface StateToProps {
@@ -85,7 +86,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 type Props = StateToProps & DispatchToProps;
 
 interface State {
-  sending: boolean
+  sending: boolean;
 }
 
 export default connect<StateToProps, DispatchToProps, MyProps>(

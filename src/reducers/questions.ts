@@ -1,6 +1,8 @@
 import { Reducer } from 'redux';
 import { Question } from '../dataelements/question';
+import { NewQuestion } from '../dataelements/newQuestion';
 import { QuestionList } from '../dataelements/questionList';
+import { IncrementLikeResponse } from 'src/dataelements/incrLikeResponse';
 
 const ADD_QUESTION = 'qicoo/question/ADD_QUESTION';
 const LOAD_QUESTION = 'qicoo/question/LOAD_QUESTION';
@@ -21,7 +23,7 @@ export const loadQuestions = (qList: Question[], total: number) => ({
 });
 export const addLike = (q: Question) => ({
   payload: {
-    favorite: q,
+    targetQuestion: q,
   },
   type: ADD_LIKE as typeof ADD_LIKE,
 });
@@ -34,14 +36,19 @@ type Actions =
 const questions: Reducer = (state: QuestionList, action: Actions) => {
   switch (action.type) {
     case ADD_QUESTION:
-      return new QuestionList([action.payload.newQuestion, ...state.questions], 
-        state.questions.length + 1);
+      return new QuestionList(
+        [action.payload.newQuestion, ...state.questions],
+        state.questions.length + 1
+      );
     case LOAD_QUESTION:
-      return new QuestionList(action.payload.loadedQuestions, action.payload.totalCount);
+      return new QuestionList(
+        action.payload.loadedQuestions,
+        action.payload.totalCount
+      );
     case ADD_LIKE:
       return new QuestionList(
         state.questions.map(q => {
-          if (q.id === action.payload.favorite.id) {
+          if (q.id === action.payload.targetQuestion.id) {
             return addLikeOne(q);
           }
           return q;
@@ -58,10 +65,13 @@ const addLikeOne = (q: Question): Question => {
   return new Question(
     q.comment,
     q.id,
-    q.username,
-    q.created_at,
-    new Date(),
-    q.like + 1
+    q.program_name,
+    q.event_name,
+    q.done_flg,
+    q.display_name,
+    q.like_count,
+    q.created,
+    q.created
   );
 };
 
