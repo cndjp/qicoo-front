@@ -5,7 +5,6 @@ import { Question } from '../dataelements/question';
 import { putLike } from 'src/actions/questions';
 
 import './QuestionElement.css';
-import { IncrementLike } from 'src/dataelements/incrLike';
 
 const INTERVAL = 1 * 1000;
 const ATTENTION_THRESHOLD = 100;
