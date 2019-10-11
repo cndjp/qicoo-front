@@ -46,7 +46,7 @@ const questions: Reducer = (state: QuestionList, action: Actions) => {
     case ADD_LIKE:
       return new QuestionList(
         state.questions.map(q => {
-          if (q.id === action.payload.targetQuestion.id) {
+          if (q.question_id === action.payload.targetQuestion.question_id) {
             return addLikeOne(q);
           }
           return q;
@@ -62,7 +62,7 @@ const questions: Reducer = (state: QuestionList, action: Actions) => {
 const addLikeOne = (q: Question): Question => {
   return new Question(
     q.comment,
-    q.id,
+    q.question_id,
     q.program_name,
     q.event_name,
     q.done_flg,

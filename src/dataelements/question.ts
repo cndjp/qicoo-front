@@ -1,7 +1,7 @@
 export class Question {
   constructor(
     readonly comment: string,
-    readonly id: number = 0,
+    readonly question_id: number,
     readonly program_name: string,
     readonly event_name: string,
     readonly done_flg: boolean,

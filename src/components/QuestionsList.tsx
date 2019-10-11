@@ -51,7 +51,7 @@ export class QuestionsList extends React.Component<Props, State> {
     sort: string
   ): JSX.Element[] => {
     const items = ql.questions.map((q: Question) => (
-      <QuestionElement key={q.id} q={q} />
+      <QuestionElement key={q.question_id} q={q} />
     ));
 
     items.push(

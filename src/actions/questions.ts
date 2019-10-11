@@ -6,8 +6,9 @@ import QuestionListInJson from '../dataelements/questionListInJson';
 import { addQuestion, addLike, loadQuestions } from '../reducers/questions';
 import { NewQuestion } from 'src/dataelements/newQuestion';
 import { IncrementLikeResponse } from 'src/dataelements/incrLikeResponse';
+//import { IncrementLike } from 'src/dataelements/incrLike';
 
-const BASE_URL = 'http://localhost:8081';
+const BASE_URL = 'BASE_URL_TO_BE_REPLACED';
 const TIMEOUT = 30 * 1000;
 
 export async function postQuestion(dispatch: Dispatch, q: NewQuestion) {
@@ -28,7 +29,11 @@ export async function postQuestion(dispatch: Dispatch, q: NewQuestion) {
 
 export async function putLike(dispatch: Dispatch, q: Question) {
   axios
-    .put(BASE_URL + '/api/v1/questions/like', q.id, { timeout: TIMEOUT })
+    .put(
+      BASE_URL + '/api/v1/questions/like',
+      { question_id: q.question_id },
+      { timeout: TIMEOUT }
+    )
     .then((res: AxiosResponse<IncrementLikeResponse>) => {
       const httpStatus = res.status;
       if (200 <= httpStatus && httpStatus <= 299) {
@@ -36,7 +41,7 @@ export async function putLike(dispatch: Dispatch, q: Question) {
           addLike(
             new Question(
               q.comment,
-              q.id,
+              q.question_id,
               q.program_name,
               q.event_name,
               q.done_flg,
@@ -60,7 +65,7 @@ export async function getQuestionList(
   dispatch: Dispatch
 ) {
   axios
-    .get('http://localhost:8081' + '/api/v1/questions', {
+    .get(BASE_URL + '/api/v1/questions', {
       params: {
         per,
         page,
