@@ -1,16 +1,20 @@
 .sending {
-    animation-duration: 0.5s;
-    animation-name: fade;
-    animation-iteration-count: 2;
-    animation-direction: alternate;
+  animation-duration: 0.5s;
+  animation-name: fade;
+  animation-iteration-count: 2;
+  animation-direction: alternate;
+}
+
+.border-2 {
+  border-width: 2px !important;
 }
 
 @keyframes fade {
-    from {
-        opacity: 1.0;
-    }
-  
-    to {
-        opacity: 0.45;
-    }
+  from {
+    opacity: 1;
   }
+
+  to {
+    opacity: 0.45;
+  }
+}
