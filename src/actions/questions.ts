@@ -7,7 +7,7 @@ import { addQuestion, addLike, loadQuestions } from '../reducers/questions';
 import { NewQuestion } from 'src/dataelements/newQuestion';
 import { IncrementLikeResponse } from 'src/dataelements/incrLikeResponse';
 
-const BASE_URL = 'BASE_URL_TO_BE_REPLACED';
+const BASE_URL = 'http://localhost:8081';
 const TIMEOUT = 30 * 1000;
 
 export async function postQuestion(dispatch: Dispatch, q: NewQuestion) {

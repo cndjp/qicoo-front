@@ -35,11 +35,12 @@ export class QuestionElement extends React.Component<Props, State> {
           </button>
         </div>
         <footer className="blockquote-footer">
-          {q.display_name} @{'anonymous'}
+          {q.display_name} @{'anonymous'}{' '}
           {q.created.toLocaleString('gregory', {
             timeZone: 'Asia/Tokyo',
             hour12: false,
-          })}
+          })}{' '}
+          {'reply:'} {q.reply_total}
         </footer>
       </div>
     );
