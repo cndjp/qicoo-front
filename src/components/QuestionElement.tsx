@@ -6,46 +6,72 @@ import { putLike } from 'src/actions/questions';
 
 import './QuestionElement.css';
 
-const INTERVAL = 1 * 1000;
+const INTERVAL = 1 * 300;
 const ATTENTION_THRESHOLD = 100;
 
 export class QuestionElement extends React.Component<Props, State> {
   constructor(prop: Props, state: State) {
     super(prop, state);
-    this.state = { sending: false };
+    this.state = {
+      sending: false,
+    };
   }
 
   public render() {
     const { q } = this.props;
 
     return (
-      <div
-        className={`list-group-item flex-column shadow align-items-start ${this.addReplyBackGround(
-          q.reply_total
-        )}`}
-      >
-        <div className="d-flex w-100 justify-content-between">
-          <h5 className="mb-1">{q.comment}</h5>
+      <div className="accordion" id="accordions">
+        <a
+          data-toggle="collapse"
+          aria-expanded="false"
+          href={`#collapse_reply_${q.question_id}`}
+          className={`list-group-item stretched-link card text-dark shadow-sm align-items-start ${this.addReplyBackGround(
+            q.reply_total
+          )}`}
+        >
+          <div className="d-flex w-100 justify-content-between">
+            <h5 className="mb-1">{q.comment}</h5>
 
-          <button
-            type="button"
-            onClick={this.addLike}
-            disabled={this.state.sending}
-            className={`btn base-color add-star-button ${this.state.sending &&
-              'sending'}`}
-          >
-            <i className={`fas ${this.starIcon(q.like_count)}`} />
-            &nbsp;{q.like_count}
-          </button>
+            <button
+              type="button"
+              onClick={this.addLike}
+              disabled={this.state.sending}
+              className={`btn base-color add-star-button ${this.state.sending &&
+                'sending'}`}
+            >
+              <i className={`fas ${this.starIcon(q.like_count)}`} />
+              &nbsp;{q.like_count}
+            </button>
+          </div>
+          <footer className="blockquote-footer">
+            {q.display_name} @{'anonymous'}{' '}
+            {q.created.toLocaleString('gregory', {
+              timeZone: 'Asia/Tokyo',
+              hour12: false,
+            })}{' '}
+            {this.addReplyMark(q.reply_total)}
+          </footer>
+        </a>
+        <div
+          id={`collapse_reply_${q.question_id}`}
+          className="collapse list-group-item"
+        >
+          <div className="card-body">"リプライだよ"</div>
+          <footer className="blockquote-footer">
+            {q.created.toLocaleString('gregory', {
+              timeZone: 'Asia/Tokyo',
+              hour12: false,
+            })}
+          </footer>
+          <div className="card-body">"リプライだよ"</div>
+          <footer className="blockquote-footer">
+            {q.created.toLocaleString('gregory', {
+              timeZone: 'Asia/Tokyo',
+              hour12: false,
+            })}
+          </footer>
         </div>
-        <footer className="blockquote-footer">
-          {q.display_name} @{'anonymous'}{' '}
-          {q.created.toLocaleString('gregory', {
-            timeZone: 'Asia/Tokyo',
-            hour12: false,
-          })}{' '}
-          {this.addReplyMark(q.reply_total)}
-        </footer>
       </div>
     );
   }
@@ -62,7 +88,7 @@ export class QuestionElement extends React.Component<Props, State> {
     if (reply_total === 0) {
       return 'bg-white';
     } else {
-      return 'bg-white border-2 border-info';
+      return 'bg-white border-2';
     }
   };
 

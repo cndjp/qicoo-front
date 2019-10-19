@@ -1,12 +1,13 @@
 .sending {
-  animation-duration: 0.5s;
+  animation-duration: 0.3s;
   animation-name: fade;
   animation-iteration-count: 2;
   animation-direction: alternate;
 }
 
 .border-2 {
-  border-width: 2px !important;
+  border-left-color: aqua;
+  border-left-width: 3px !important;
 }
 
 @keyframes fade {
