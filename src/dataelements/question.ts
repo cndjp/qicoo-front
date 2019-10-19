@@ -8,6 +8,7 @@ export class Question {
     readonly display_name: string = '',
     readonly like_count: number = 0,
     readonly created: Date = new Date(),
-    readonly updated: Date = new Date()
+    readonly updated: Date = new Date(),
+    readonly reply_total: number = 0
   ) {}
 }
