@@ -14,6 +14,7 @@ export class QuestionElement extends React.Component<Props, State> {
     super(prop, state);
     this.state = {
       sending: false,
+      input: '',
     };
   }
 
@@ -71,10 +72,40 @@ export class QuestionElement extends React.Component<Props, State> {
               hour12: false,
             })}
           </footer>
+          <form onSubmit={this.addLike} className="form-inline w-100 pt-3">
+            <div className="mb-2 pr-md-0 col-md">
+              <textarea
+                value={this.state.input}
+                onChange={this.handleQuestionInput}
+                className="form-control w-100"
+                rows={2}
+                placeholder="リプライしてみよう！"
+              />
+            </div>
+            <div className="mb-2 col-md-auto">
+              <button
+                className="btn btn-info w-100"
+                type="submit"
+                disabled={!this.validInput()}
+              >
+                リプライ
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     );
   }
+
+  private handleQuestionInput = (
+    e: React.FormEvent<HTMLTextAreaElement>
+  ): void => {
+    this.setState({ input: e.currentTarget.value });
+  };
+
+  private validInput = (): boolean => {
+    return this.state.input !== null && this.state.input.length > 0;
+  };
 
   private addLike = () => {
     this.props.addLike(this.props.q);
@@ -133,6 +164,7 @@ type Props = StateToProps & DispatchToProps;
 
 interface State {
   sending: boolean;
+  input: string;
 }
 
 export default connect<StateToProps, DispatchToProps, MyProps>(
