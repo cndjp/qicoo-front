@@ -67,9 +67,10 @@ const addLikeOne = (q: Question): Question => {
     q.event_name,
     q.done_flg,
     q.display_name,
-    q.like_count,
+    q.like_count + 1,
     q.created,
-    q.created
+    q.updated,
+    q.reply_total
   );
 };
 

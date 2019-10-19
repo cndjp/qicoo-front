@@ -19,7 +19,7 @@ export class QuestionElement extends React.Component<Props, State> {
     const { q } = this.props;
 
     return (
-      <div className="list-group-item flex-column align-items-start">
+      <div className="list-group-item flex-column shadow align-items-start">
         <div className="d-flex w-100 justify-content-between">
           <h5 className="mb-1">{q.comment}</h5>
 
@@ -40,7 +40,7 @@ export class QuestionElement extends React.Component<Props, State> {
             timeZone: 'Asia/Tokyo',
             hour12: false,
           })}{' '}
-          {'reply:'} {q.reply_total}
+          {this.addReplyMark(q.reply_total)}
         </footer>
       </div>
     );
@@ -52,6 +52,14 @@ export class QuestionElement extends React.Component<Props, State> {
     setTimeout(() => {
       this.setState({ sending: false });
     }, INTERVAL);
+  };
+
+  private addReplyMark = (reply_total: number): string => {
+    if (reply_total === 0) {
+      return '';
+    } else {
+      return '💭' + reply_total;
+    }
   };
 
   private starIcon = (like: number): string => {
