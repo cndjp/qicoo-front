@@ -26,9 +26,7 @@ export class QuestionElement extends React.Component<Props, State> {
     return (
       <div className="accordion" id="accordions">
         <a
-          data-toggle="collapse"
           aria-expanded="false"
-          href={`#collapse_reply_${q.question_id}`}
           className={`list-group-item stretched-link card text-dark shadow align-items-start ${this.addReplyBackGround(
             q.reply_total
           )}`}
@@ -53,12 +51,14 @@ export class QuestionElement extends React.Component<Props, State> {
               timeZone: 'Asia/Tokyo',
               hour12: false,
             })}{' '}
-            {this.addReplyMark(q.reply_total)}
+            <a data-toggle="collapse" href={`#collapse_reply_${q.question_id}`}>
+              {this.addReplyMark(q.reply_total)}
+            </a>
           </footer>
         </a>
         <div
           id={`collapse_reply_${q.question_id}`}
-          className="collapse list-group-item"
+          className="collapse list-group-item disabled"
         >
           {this.getReplyList(q.reply_list)}
           <form onSubmit={this.postNewReply} className="form-inline w-100 pt-2">
