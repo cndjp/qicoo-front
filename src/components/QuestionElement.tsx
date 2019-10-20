@@ -143,7 +143,7 @@ export class QuestionElement extends React.Component<Props, State> {
 
   private addReplyMark = (reply_total: number): string => {
     if (reply_total === 0) {
-      return '';
+      return '💭';
     } else {
       return '💭' + reply_total;
     }
