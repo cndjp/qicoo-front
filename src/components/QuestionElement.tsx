@@ -45,7 +45,7 @@ export class QuestionElement extends React.Component<Props, State> {
               &nbsp;{q.like_count}
             </button>
           </div>
-          <footer className="blockquote-footer">
+          <footer className="card-subtitle small text-secondary">
             {q.display_name} @{'anonymous'}{' '}
             {q.created.toLocaleString('gregory', {
               timeZone: 'Asia/Tokyo',
@@ -88,11 +88,11 @@ export class QuestionElement extends React.Component<Props, State> {
 
   private getReplyList = (replyList: Reply[]) => {
     return (
-      <ul>
+      <ul className="list-unstyled text-dark">
         {replyList.map(reply => (
           <li>
-            <div className="card-body">{reply.comment}</div>
-            <footer className="blockquote-footer">
+            <h5 className="card-body border-bottom">{reply.comment}</h5>
+            <footer className="card-subtitle small text-secondary">
               {reply.created.toLocaleString('gregory', {
                 timeZone: 'Asia/Tokyo',
                 hour12: false,
