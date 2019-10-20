@@ -91,7 +91,7 @@ export class QuestionElement extends React.Component<Props, State> {
       <ul className="list-unstyled text-dark">
         {replyList.map(reply => (
           <li>
-            <h5 className="card-body border-bottom">{reply.comment}</h5>
+            <h6 className="card-body border-bottom">{reply.comment}</h6>
             <footer className="card-subtitle small text-secondary">
               {reply.created.toLocaleString('gregory', {
                 timeZone: 'Asia/Tokyo',
