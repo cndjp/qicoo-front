@@ -27,7 +27,7 @@ export class QuestionElement extends React.Component<Props, State> {
       <div className="accordion" id="accordions">
         <a
           aria-expanded="false"
-          className={`list-group-item stretched-link card text-dark shadow align-items-start ${this.addReplyBackGround(
+          className={`list-group-item stretched-link card text-dark shadow-sm align-items-start ${this.addReplyBackGround(
             q.reply_total
           )}`}
         >
