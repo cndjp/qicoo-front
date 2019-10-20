@@ -5,12 +5,19 @@ import { QuestionList } from '../dataelements/questionList';
 const ADD_QUESTION = 'qicoo/question/ADD_QUESTION';
 const LOAD_QUESTION = 'qicoo/question/LOAD_QUESTION';
 const ADD_LIKE = 'qicoo/question/ADD_LIKE';
+const ADD_REPLY = 'qicoo/question/ADD_REPLY';
 
 export const addQuestion = (q: Question) => ({
   payload: {
     newQuestion: q,
   },
   type: ADD_QUESTION as typeof ADD_QUESTION,
+});
+export const addReply = (q: Question) => ({
+  payload: {
+    newQuestion: q,
+  },
+  type: ADD_REPLY as typeof ADD_REPLY,
 });
 export const loadQuestions = (qList: Question[], total: number) => ({
   payload: {
@@ -29,7 +36,8 @@ export const addLike = (q: Question) => ({
 type Actions =
   | ReturnType<typeof addQuestion>
   | ReturnType<typeof loadQuestions>
-  | ReturnType<typeof addLike>;
+  | ReturnType<typeof addLike>
+  | ReturnType<typeof addReply>;
 
 const questions: Reducer = (state: QuestionList, action: Actions) => {
   switch (action.type) {
@@ -53,6 +61,16 @@ const questions: Reducer = (state: QuestionList, action: Actions) => {
         }),
         state.total
       );
+    case ADD_REPLY:
+      return new QuestionList(
+        state.questions.map(q => {
+          if (q.question_id === action.payload.newQuestion.question_id) {
+            return action.payload.newQuestion;
+          }
+          return q;
+        }),
+        state.total
+      );
     default:
       // return defaultQuestions;
       return new QuestionList([], 0);
@@ -70,6 +88,7 @@ const addLikeOne = (q: Question): Question => {
     q.like_count + 1,
     q.created,
     q.updated,
+    q.reply_list,
     q.reply_total
   );
 };

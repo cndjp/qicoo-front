@@ -1,3 +1,5 @@
+import { Reply } from './reply';
+
 export class Question {
   constructor(
     readonly comment: string,
@@ -9,6 +11,7 @@ export class Question {
     readonly like_count: number = 0,
     readonly created: Date = new Date(),
     readonly updated: Date = new Date(),
+    readonly reply_list: Reply[],
     readonly reply_total: number = 0
   ) {}
 }

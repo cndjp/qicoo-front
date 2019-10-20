@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { Reply } from '../dataelements/reply';
 import { Question } from '../dataelements/question';
-import { putLike } from 'src/actions/questions';
+import { putLike, postReply } from 'src/actions/questions';
 
 import './QuestionElement.css';
+import { NewReply } from 'src/dataelements/newReply';
 
 const INTERVAL = 1 * 300;
 const ATTENTION_THRESHOLD = 100;
@@ -27,7 +29,7 @@ export class QuestionElement extends React.Component<Props, State> {
           data-toggle="collapse"
           aria-expanded="false"
           href={`#collapse_reply_${q.question_id}`}
-          className={`list-group-item stretched-link card text-dark shadow-sm align-items-start ${this.addReplyBackGround(
+          className={`list-group-item stretched-link card text-dark shadow align-items-start ${this.addReplyBackGround(
             q.reply_total
           )}`}
         >
@@ -58,25 +60,12 @@ export class QuestionElement extends React.Component<Props, State> {
           id={`collapse_reply_${q.question_id}`}
           className="collapse list-group-item"
         >
-          <div className="card-body">"リプライだよ"</div>
-          <footer className="blockquote-footer">
-            {q.created.toLocaleString('gregory', {
-              timeZone: 'Asia/Tokyo',
-              hour12: false,
-            })}
-          </footer>
-          <div className="card-body">"リプライだよ"</div>
-          <footer className="blockquote-footer">
-            {q.created.toLocaleString('gregory', {
-              timeZone: 'Asia/Tokyo',
-              hour12: false,
-            })}
-          </footer>
-          <form onSubmit={this.addLike} className="form-inline w-100 pt-3">
+          {this.getReplyList(q.reply_list)}
+          <form onSubmit={this.postNewReply} className="form-inline w-100 pt-2">
             <div className="mb-2 pr-md-0 col-md">
               <textarea
                 value={this.state.input}
-                onChange={this.handleQuestionInput}
+                onChange={this.handleReplyInput}
                 className="form-control w-100"
                 rows={2}
                 placeholder="リプライしてみよう！"
@@ -97,7 +86,25 @@ export class QuestionElement extends React.Component<Props, State> {
     );
   }
 
-  private handleQuestionInput = (
+  private getReplyList = (replyList: Reply[]) => {
+    return (
+      <ul>
+        {replyList.map(reply => (
+          <li>
+            <div className="card-body">{reply.comment}</div>
+            <footer className="blockquote-footer">
+              {reply.created.toLocaleString('gregory', {
+                timeZone: 'Asia/Tokyo',
+                hour12: false,
+              })}
+            </footer>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
+  private handleReplyInput = (
     e: React.FormEvent<HTMLTextAreaElement>
   ): void => {
     this.setState({ input: e.currentTarget.value });
@@ -113,6 +120,17 @@ export class QuestionElement extends React.Component<Props, State> {
     setTimeout(() => {
       this.setState({ sending: false });
     }, INTERVAL);
+  };
+
+  private clearForm = () => {
+    this.setState({ input: '' });
+  };
+
+  private postNewReply = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const newReply = new NewReply(this.props.q.question_id, this.state.input);
+    this.props.addReply(newReply);
+    this.clearForm();
   };
 
   private addReplyBackGround = (reply_total: number): string => {
@@ -153,10 +171,14 @@ const mapStateToProps = (reduxState: any, props: MyProps): StateToProps => ({
 
 interface DispatchToProps {
   addLike: (q: Question) => void;
+  addReply: (r: NewReply) => void;
 }
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   addLike: (q: Question) => {
     putLike(dispatch, q);
+  },
+  addReply: (r: NewReply) => {
+    postReply(dispatch, r);
   },
 });
 

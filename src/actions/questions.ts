@@ -3,7 +3,13 @@ import axios, { AxiosResponse } from 'axios';
 
 import { Question } from '../dataelements/question';
 import QuestionListInJson from '../dataelements/questionListInJson';
-import { addQuestion, addLike, loadQuestions } from '../reducers/questions';
+import {
+  addQuestion,
+  addLike,
+  loadQuestions,
+  addReply,
+} from '../reducers/questions';
+import { NewReply } from 'src/dataelements/newReply';
 import { NewQuestion } from 'src/dataelements/newQuestion';
 import { IncrementLikeResponse } from 'src/dataelements/incrLikeResponse';
 
@@ -17,6 +23,22 @@ export async function postQuestion(dispatch: Dispatch, q: NewQuestion) {
       const httpStatus = res.status;
       if (200 <= httpStatus && httpStatus <= 299) {
         dispatch(addQuestion(res.data));
+      } else {
+        console.warn('http status code in POST response: ' + httpStatus);
+      }
+    })
+    .catch((err: AxiosResponse) => {
+      console.error(err);
+    });
+}
+
+export async function postReply(dispatch: Dispatch, r: NewReply) {
+  axios
+    .post(BASE_URL + '/api/v1/questions/reply', r, { timeout: TIMEOUT })
+    .then((res: AxiosResponse) => {
+      const httpStatus = res.status;
+      if (200 <= httpStatus && httpStatus <= 299) {
+        dispatch(addReply(res.data));
       } else {
         console.warn('http status code in POST response: ' + httpStatus);
       }
@@ -48,6 +70,7 @@ export async function putLike(dispatch: Dispatch, q: Question) {
               res.data.like_count,
               q.created,
               q.updated,
+              q.reply_list,
               q.reply_total
             )
           )
