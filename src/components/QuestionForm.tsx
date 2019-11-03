@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Question } from '../dataelements/question';
 import { postQuestion } from 'src/actions/questions';
+import { NewQuestion } from 'src/dataelements/newQuestion';
 
 interface Prop {
-  addQuestion: (q: Question) => void;
+  addQuestion: (q: NewQuestion) => void;
 }
 
 interface State {
@@ -34,7 +35,11 @@ class QuestionForm extends React.Component<Prop, State> {
             />
           </div>
           <div className="mb-2 col-md-auto">
-            <button className="btn btn-light w-100" type="submit" disabled={!this.validInput()}>
+            <button
+              className="btn btn-light w-100"
+              type="submit"
+              disabled={!this.validInput()}
+            >
               聞いてみる
             </button>
           </div>
@@ -45,7 +50,7 @@ class QuestionForm extends React.Component<Prop, State> {
 
   private postNewQuestion = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const newQuestion = new Question(this.state.input);
+    const newQuestion = new NewQuestion(this.state.input);
     this.props.addQuestion(newQuestion);
     this.clearForm();
   };
@@ -60,8 +65,8 @@ class QuestionForm extends React.Component<Prop, State> {
     this.setState({ input: '' });
   };
 
-  private validInput = () : boolean => {
-    return this.state.input !== null && this.state.input.length > 0
+  private validInput = (): boolean => {
+    return this.state.input !== null && this.state.input.length > 0;
   };
 }
 

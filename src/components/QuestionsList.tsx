@@ -51,7 +51,7 @@ export class QuestionsList extends React.Component<Props, State> {
     sort: string
   ): JSX.Element[] => {
     const items = ql.questions.map((q: Question) => (
-      <QuestionElement key={q.id} q={q} />
+      <QuestionElement key={q.question_id} q={q} />
     ));
 
     items.push(
@@ -82,12 +82,7 @@ interface DispatchToProps {
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   loadQuestion: (page: number, sort: string): void => {
-    getQuestionList(
-      (page - 1) * QUESTIONS_PER_PAGE + 1,
-      page * QUESTIONS_PER_PAGE,
-      sort,
-      dispatch
-    );
+    getQuestionList(QUESTIONS_PER_PAGE, page, sort, dispatch);
   },
 });
 
