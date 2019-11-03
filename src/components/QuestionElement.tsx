@@ -34,16 +34,26 @@ export class QuestionElement extends React.Component<Props, State> {
           <div className="d-flex w-100 justify-content-between">
             <h5 className="mb-1">{q.comment}</h5>
 
-            <button
-              type="button"
-              onClick={this.addLike}
-              disabled={this.state.sending}
-              className={`btn base-color add-star-button ${this.state.sending &&
-                'sending'}`}
-            >
-              <i className={`fas ${this.starIcon(q.like_count)}`} />
-              &nbsp;{q.like_count}
-            </button>
+            <div className="btn-toolbar">
+              <button
+                type="button"
+                className="btn btn-info mr-2"
+                data-toggle="collapse"
+                data-target={`#collapse_reply_${q.question_id}`}
+              >
+                {this.addReplyMark(q.reply_total)}
+              </button>
+              <button
+                type="button"
+                onClick={this.addLike}
+                disabled={this.state.sending}
+                className={`btn base-color add-star-button ${this.state
+                  .sending && 'sending'}`}
+              >
+                <i className={`fas ${this.starIcon(q.like_count)}`} />
+                &nbsp;{q.like_count}
+              </button>
+            </div>
           </div>
           <footer className="card-subtitle small text-secondary">
             {q.display_name} @{'anonymous'}{' '}
@@ -51,9 +61,6 @@ export class QuestionElement extends React.Component<Props, State> {
               timeZone: 'Asia/Tokyo',
               hour12: false,
             })}{' '}
-            <a data-toggle="collapse" href={`#collapse_reply_${q.question_id}`}>
-              {this.addReplyMark(q.reply_total)}
-            </a>
           </footer>
         </a>
         <div
