@@ -13,7 +13,7 @@ import { NewReply } from 'src/dataelements/newReply';
 import { NewQuestion } from 'src/dataelements/newQuestion';
 import { IncrementLikeResponse } from 'src/dataelements/incrLikeResponse';
 
-const BASE_URL = 'http://localhost:8081';
+const BASE_URL = 'https://api.qicoo.tokyo';
 const TIMEOUT = 30 * 1000;
 
 export async function postQuestion(dispatch: Dispatch, q: NewQuestion) {
