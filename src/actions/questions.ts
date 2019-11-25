@@ -12,9 +12,12 @@ import {
 import { NewReply } from 'src/dataelements/newReply';
 import { NewQuestion } from 'src/dataelements/newQuestion';
 import { IncrementLikeResponse } from 'src/dataelements/incrLikeResponse';
+import axiosRetry from 'axios-retry';
 
 const BASE_URL = 'https://api.qicoo.tokyo';
 const TIMEOUT = 30 * 1000;
+
+axiosRetry(axios, { retries: 3 });
 
 export async function postQuestion(dispatch: Dispatch, q: NewQuestion) {
   axios
