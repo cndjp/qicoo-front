@@ -33,7 +33,7 @@ export class QuestionElement extends React.Component<Props, State> {
         >
           <div className="d-flex w-100 justify-content-between">
             <h5 className="mb-1">{q.comment}</h5>
-            <div className="btn-group btn-group-sm">
+            <div className="btn-groups">
               <button
                 type="button"
                 className="btn btn-info mr-2"
