@@ -1,5 +1,5 @@
 .sending {
-  animation-duration: 0.3s;
+  animation-duration: 0.5s;
   animation-name: fade;
   animation-iteration-count: 2;
   animation-direction: alternate;

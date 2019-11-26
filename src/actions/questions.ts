@@ -17,7 +17,12 @@ import axiosRetry from 'axios-retry';
 const BASE_URL = 'https://api.qicoo.tokyo';
 const TIMEOUT = 30 * 1000;
 
-axiosRetry(axios, { retries: 5 });
+axiosRetry(axios, {
+  retries: 10,
+  retryDelay: retryCount => {
+    return retryCount * 100;
+  },
+});
 
 export async function postQuestion(dispatch: Dispatch, q: NewQuestion) {
   axios
