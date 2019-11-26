@@ -8,25 +8,10 @@
 .btn-group {
   display: flex;
 }
-.btn {
-  padding: 10px 20px;
-  font-size: 20px;
-  border-radius: 10px;
-  width: 50%;
-}
 
 .border-2 {
   border-left-color: aqua;
   border-left-width: 3px !important;
-}
-
-@media only screen and (max-device-width: 480px) {
-  .btn {
-    padding: 10px 20px;
-    font-size: 20px;
-    border-radius: 10px;
-    width: 30%;
-  }
 }
 
 @keyframes fade {
