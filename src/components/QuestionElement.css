@@ -5,6 +5,10 @@
   animation-direction: alternate;
 }
 
+.btn-group {
+  display: flex;
+}
+
 .border-2 {
   border-left-color: aqua;
   border-left-width: 3px !important;
